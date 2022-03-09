@@ -8,7 +8,6 @@ const TweetList = () => {
     const querySnapshot = async () => {
         const { docs } = await getDocs(collection(dbService, "tweet"));
         const tweets = docs.map((doc) => {
-            const date = new Date(doc.data().createdAt.seconds);
             return {
                 id: doc.id,
                 ...doc.data(),
@@ -33,7 +32,9 @@ const TweetList = () => {
                                 <img className="profile-img" />
                                 <div className="tweet-info">
                                     <div className="profile-info">
-                                        <p className="name">Ryan Re</p>
+                                        <p className="name">
+                                            {tweet.user.displayName}
+                                        </p>
                                         <p className="date">
                                             {" "}
                                             {tweet.createdAt}

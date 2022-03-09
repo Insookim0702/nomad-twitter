@@ -2,7 +2,7 @@ import { useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { dbService } from "fbase";
 import TweetList from "components/TweetList";
-export default function Home() {
+export default function Home({ user }) {
     const [tweet, setTweet] = useState("");
     const onSubmit = async (event) => {
         event.preventDefault();
@@ -12,6 +12,11 @@ export default function Home() {
         await addDoc(collection(dbService, "tweet"), {
             tweet: tweet,
             createdAt: date,
+            user: {
+                photoURL: user.photoURL,
+                email: user.email,
+                displayName: user.displayName,
+            },
         });
     };
     const onChange = (event) => {

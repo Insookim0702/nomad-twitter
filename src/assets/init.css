@@ -136,3 +136,8 @@ table {
     max-width: 400px;
     height: 100vh;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+}

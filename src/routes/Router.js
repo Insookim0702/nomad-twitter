@@ -3,16 +3,20 @@ import SignUp from "routes/SignUp";
 import Auth from "routes/Auth";
 import Home from "routes/Home";
 import Profile from "routes/Profile";
-import Navigation from "./Navigation";
+import Navigation from "../components/Navigation";
 
-export default function AppRouter({ isLoggedIn }) {
+export default function AppRouter({ isLoggedIn, user }) {
     return (
         <Router>
             {isLoggedIn && <Navigation />}
             <Routes>
                 {isLoggedIn ? (
                     <>
-                        <Route exact path="/" element={<Home />}></Route>
+                        <Route
+                            exact
+                            path="/"
+                            element={<Home user={user} />}
+                        ></Route>
                         <Route
                             exact
                             path="/profile"
