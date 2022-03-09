@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { authService } from "fbase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export default function SignUp() {
     const [email, setEmail] = useState("");
@@ -15,10 +16,7 @@ export default function SignUp() {
     async function onSubmit(event) {
         event.preventDefault();
         try {
-            const response = await authService.createUserWithEmailAndPassword(
-                email,
-                password
-            );
+            await createUserWithEmailAndPassword(authService, email, password);
         } catch (err) {
             alert(err.message);
         }
