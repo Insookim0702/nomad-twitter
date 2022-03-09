@@ -1,11 +1,11 @@
+import { useState } from "react";
 import { authService } from "fbase";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-export default function Auth() {
+
+export default function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     function onChange(event) {
-        const { value, name } = event.target;
+        const { name, value } = event.target;
         if (name === "email") {
             setEmail(value);
         } else {
@@ -14,9 +14,8 @@ export default function Auth() {
     }
     async function onSubmit(event) {
         event.preventDefault();
-        // login
         try {
-            const res = await authService.signInWithEmailAndPassword(
+            const response = await authService.createUserWithEmailAndPassword(
                 email,
                 password
             );
@@ -26,29 +25,22 @@ export default function Auth() {
     }
     return (
         <>
-            <div>Auth</div>
+            <h1>회원가입</h1>
             <form onSubmit={onSubmit}>
                 <input
                     name="email"
                     type="email"
-                    placeholder="email"
                     value={email}
                     onChange={onChange}
                 />
                 <input
                     name="password"
                     type="password"
-                    placeholder="password"
                     value={password}
                     onChange={onChange}
                 />
-                <input type="submit" name="login" />
+                <input name="" type="submit" />
             </form>
-            <div>
-                <button>Continue with Google</button>
-                <button>Continue with Github</button>
-            </div>
-            <Link to="/signup">회원가입</Link>
         </>
     );
 }
